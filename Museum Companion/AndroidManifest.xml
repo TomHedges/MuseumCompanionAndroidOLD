@@ -1,0 +1,51 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tomhedges.museumcompanion"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="15" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".activities.MainMenu"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.DisplayItem"
+            android:label="@string/title_activity_default" >
+        </activity>
+        <activity
+            android:name=".activities.SearchCollections"
+            android:label="@string/title_activity_default" >
+        </activity>
+        <activity
+            android:name=".activities.GridViewActivity"
+            android:theme="@android:style/Theme.Holo.NoActionBar" android:label="@string/title_activity_default">
+        </activity>
+        <activity
+            android:name=".activities.FullScreenViewActivity"
+            android:theme="@android:style/Theme.Holo.NoActionBar" android:label="@string/title_activity_default">
+        </activity>
+        <activity
+            android:name=".activities.SettingsMenu"
+            android:theme="@android:style/Theme.Holo.NoActionBar" android:label="@string/title_activity_default">
+        </activity>
+        <activity
+            android:name=".activities.DisplaySearchResults"
+            android:theme="@android:style/Theme.Holo.NoActionBar" android:label="@string/title_activity_default">
+        </activity>
+    </application>
+
+</manifest>

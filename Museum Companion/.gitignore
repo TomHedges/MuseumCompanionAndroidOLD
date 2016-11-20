@@ -1,0 +1,23 @@
+# Tom Hedges - 20/11/2016
+# From - http://stackoverflow.com/questions/3325736/eclipse-android-and-gitignore
+
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Eclipse project files
+.classpath
+.project

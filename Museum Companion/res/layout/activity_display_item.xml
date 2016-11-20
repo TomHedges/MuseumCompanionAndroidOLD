@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:padding="5dp" >
+
+    <RelativeLayout
+        android:id="@+id/lytObjectDetailsWrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible" >
+
+        <TextView
+            android:id="@+id/tvArtefactname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Name of Artefact"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/tvInstitution"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tvArtefactname"
+            android:text="Institution"
+            android:textStyle="italic" />
+
+        <ImageView
+            android:id="@+id/ivMainImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvInstitution"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tvMoreImages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivMainImage"
+            android:layout_alignRight="@+id/ivMainImage"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_back"
+            android:padding="5dp"
+            android:text="Click for more images..."
+            android:textColor="#0000FF" />
+
+        <TextView
+            android:id="@+id/tvResults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tvMoreImages"
+            android:layout_marginTop="5dp"
+            android:text="Results will appear here..." />
+
+        <Button
+            android:id="@+id/btnFullData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvResults"
+            android:layout_alignParentRight="true"
+            android:text="View raw data for this artefact" />
+
+    </RelativeLayout>
+
+</ScrollView>
