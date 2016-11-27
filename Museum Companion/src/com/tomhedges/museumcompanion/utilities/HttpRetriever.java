@@ -133,6 +133,8 @@ public class HttpRetriever {
         	Log.d(HttpRetriever.class.getName(), "About to read each line");
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
+                
+                //UNCOMMENT THIS LINE FOR VERBOSE LOGGING OF RESPONSE DATA
             	//Log.d(HttpRetriever.class.getName(), line);
             }
         	Log.d(HttpRetriever.class.getName(), "Finished handling each line");

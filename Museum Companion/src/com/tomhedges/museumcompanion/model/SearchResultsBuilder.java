@@ -31,11 +31,60 @@ public class SearchResultsBuilder extends Observable {
 		this.context = context;
 	}
 
-	public void getSearchResultsByName(DataSource dsDataSource, String strName) {
 
+	public void getSearchResultsByLabelRef(DataSource dsDataSource, String strLabelRef) {
 		this.dsDataSource = dsDataSource;
-
+		new SearchForResultsByLabelRef().execute(strLabelRef);
+	}
+	
+	public void getSearchResultsByName(DataSource dsDataSource, String strName) {
+		this.dsDataSource = dsDataSource;
 		new SearchForResultsByName().execute(strName);
+	}
+
+	private class SearchForResultsByLabelRef extends AsyncTask<String, Void, Boolean> {
+		private RemoteDataAccess remoteDataAccess;
+		private SearchResults srResults;
+
+		protected void onPreExecute() {
+			super.onPreExecute();
+			remoteDataAccess = new RemoteDataAccess();
+		}
+
+		@Override
+		protected Boolean doInBackground(String... params) {
+			String strSearchResults = remoteDataAccess.getSearchResultsByLabelRef(dsDataSource, params[0]);
+
+			//publishProgress("blah");
+			if (strSearchResults.equals(Constants.ERROR_CODE)) {
+				Log.e(SearchForResultsByName.class.getName(), "Failed to retrieve result...");
+				return false;
+			} else {
+				Log.d(SearchForResultsByName.class.getName(), "Successfully retrieved result!");
+				srResults = buildSearchResults(strSearchResults);
+				if (srResults != null) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+
+		protected void onProgressUpdate(Void... progress) {
+			super.onProgressUpdate(progress);
+		}
+
+		protected void onPostExecute(Boolean succcessful) {
+			super.onPostExecute(succcessful);
+
+			if (succcessful) {
+				Log.d(SearchResultsBuilder.class.getName(), "Passing back Search Results, total results: " + srResults.getTotalResults());
+				SendUpdate(srResults);
+			} else {
+				Log.e(SearchResultsBuilder.class.getName(), "Exiting with null data");
+				SendUpdate(null);
+			}
+		}
 	}
 
 	private class SearchForResultsByName extends AsyncTask<String, Void, Boolean> {

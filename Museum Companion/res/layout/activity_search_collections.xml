@@ -63,6 +63,30 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:id="@+id/tvItemRefLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Label Ref:" />
+
+            <EditText
+                android:id="@+id/etObjectLabelRef"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="6" />
+
+            <Button
+                android:id="@+id/btnSearchByLabelRef"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search!" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
                 android:id="@+id/tvItemNameLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -40,10 +40,12 @@ public class SearchCollections extends Activity implements OnClickListener, OnIt
 	private DataSource dsDataSource;
 
 	private EditText etObjectID;
+	private EditText etObjectLabelRef;
 	private EditText etObjectName;
 	private ProgressBar mProgress;
 	private Button btnFind;
 	private Button btnSearchByName;
+	private Button btnSearchByLabelRef;
 	private Spinner spMuseum;
 
 	@Override
@@ -57,16 +59,21 @@ public class SearchCollections extends Activity implements OnClickListener, OnIt
 		srBuilder.addObserver(this);
 
 		etObjectID = (EditText) findViewById(R.id.etObjectID);
+		etObjectLabelRef = (EditText) findViewById(R.id.etObjectLabelRef);
 		etObjectName = (EditText) findViewById(R.id.etObjectName);
 		mProgress = (ProgressBar) findViewById(R.id.pbLoad);
 		btnFind = (Button) findViewById(R.id.btnFind);
+		btnSearchByLabelRef = (Button) findViewById(R.id.btnSearchByLabelRef);
 		btnSearchByName = (Button) findViewById(R.id.btnSearchByName);
 		spMuseum = (Spinner) findViewById(R.id.spMuseum);
 
+		//example values
 		etObjectID.setText("O34256");
+		etObjectLabelRef.setText("Ethno 1869,10-5.1");
 		etObjectName.setText("statue");
 		
 		btnFind.setOnClickListener(this);
+		btnSearchByLabelRef.setOnClickListener(this);
 		btnSearchByName.setOnClickListener(this);
 		spMuseum.setOnItemSelectedListener(this);
 
@@ -100,6 +107,11 @@ public class SearchCollections extends Activity implements OnClickListener, OnIt
 			} else {
 				ioBuilder.getObject(dsDataSource, etObjectID.getText().toString());
 			}
+			break;
+
+		case R.id.btnSearchByLabelRef:
+			mProgress.setVisibility(View.VISIBLE);
+			srBuilder.getSearchResultsByLabelRef(dsDataSource, etObjectLabelRef.getText().toString());
 			break;
 
 		case R.id.btnSearchByName:

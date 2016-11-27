@@ -90,6 +90,81 @@ public class RemoteDataAccess {
 
 	}
 
+	public String getSearchResultsByLabelRef(DataSource dsDataSource, String strLabelRef) {
+		String returnData = null;
+		httpRetriever = new HttpRetriever();
+
+		try {
+			// Building Parameters
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+
+			Log.d(RemoteDataAccess.class.getName(), "Attempting a search for: '" + strLabelRef + "' in collection of " + dsDataSource);
+			// getting product details by making HTTP request
+
+			String strSearchDetail = null;
+			//TODO: Extract this to some sort of dependency injection??
+			switch (dsDataSource) {
+			case BRITISH_MUSEUM:
+				//String strSearchDetail = "PREFIX crm: <http://erlangen-crm.org/current/> PREFIX fts: <http://www.ontotext.com/owlim/fts#>"
+				//	+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?obj ?label WHERE { ?obj crm:P102_has_title ?title ."
+				//	+ "?title rdfs:label ?label .   FILTER(CONTAINS(?label,\"" + strNameComponent + "\")) }";// LIMIT 100";
+
+				
+				strSearchDetail = "PREFIX crm: <http://erlangen-crm.org/current/>" + 
+				"PREFIX bmo: <http://collection.britishmuseum.org/id/ontology/>" +
+				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" + 
+				"SELECT DISTINCT ?obj (group_concat(?label;separator=\", \") as ?label) " + 
+				"where {" + 
+				"?obj crm:P102_has_title ?title . " + 
+				"?title rdfs:label ?label ." +
+				"?obj bmo:PX_object_exhibition_label ?exhib_label . " +
+				"FILTER regex(?exhib_label, \"" + strLabelRef + "\", \"i\")" +
+				"} GROUP BY ?obj " +
+				"LIMIT " + Constants.SEARCH_RESULTS_REQUESTED;
+
+				params.add(new BasicNameValuePair("query", strSearchDetail));
+				params.add(new BasicNameValuePair("_equivalent", "false"));
+				params.add(new BasicNameValuePair("equivalent", "false"));
+				params.add(new BasicNameValuePair("_implicit", "false"));
+				params.add(new BasicNameValuePair("implicit", "false"));
+				returnData = httpRetriever.makeHttpRequest(Constants.SEARCH_RESULTS_FIELD_BRITISH_MUSEUM_SEARCH_ROOT, "GET", params);
+				Log.d(RemoteDataAccess.class.getName(), "Results returned");
+				break;
+
+			case VICTORIA_AND_ALBERT_MUSEUM:
+				// TODO: IMPLEMENT!
+				
+				strSearchDetail = strLabelRef;
+
+				params.add(new BasicNameValuePair("q", strSearchDetail));
+				params.add(new BasicNameValuePair("limit", "45"));
+				returnData = httpRetriever.makeHttpRequest(Constants.SEARCH_RESULTS_FIELD_VICTORIA_AND_ALBERT_SEARCH_ROOT, "GET", params);
+				Log.d(RemoteDataAccess.class.getName(), "Results returned");
+				break;
+
+			case TEST_DATA_SOURCE:
+				returnData = Constants.TEST_DATA;
+				break;
+
+			default:
+				break;
+			}
+
+			if (!returnData.equals(Constants.ERROR_CODE)) {
+				Log.d(RemoteDataAccess.class.getName(), "Request results sample: " + returnData.substring(0, 200));
+				//ioItemToReturn = new BritishMuseumBuilder(dsDataSource, strObjectID, returnData);
+			} else {
+				Log.e(RemoteDataAccess.class.getName(), "No result to return");
+				return Constants.ERROR_CODE;
+			}
+
+			return returnData;
+		} catch (Error e) {
+			e.printStackTrace();
+			return Constants.ERROR_CODE;
+		}
+	}
+
 	public String getSearchResultsByName(DataSource dsDataSource, String strNameComponent) {
 		String returnData = null;
 		httpRetriever = new HttpRetriever();
@@ -168,7 +243,5 @@ public class RemoteDataAccess {
 			e.printStackTrace();
 			return Constants.ERROR_CODE;
 		}
-
 	}
-
 }
