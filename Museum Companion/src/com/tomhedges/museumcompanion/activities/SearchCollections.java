@@ -198,7 +198,7 @@ public class SearchCollections extends Activity implements OnClickListener, OnIt
 				mProgress.setVisibility(View.INVISIBLE);
 				Toast.makeText(this, "Sorry - no results returned!", Toast.LENGTH_SHORT).show();
 			} else {
-				//TEST DISPLAY CUNT OF RESULTS
+				//TEST DISPLAY OF RESULTS
 				//SearchResults srResults;
 				//srResults = (SearchResults) data;
 				//Toast.makeText(this, "Returned: " + srResults.getTotalResults() + " results!", Toast.LENGTH_SHORT).show();

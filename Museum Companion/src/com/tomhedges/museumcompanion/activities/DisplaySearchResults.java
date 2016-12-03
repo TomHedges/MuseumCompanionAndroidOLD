@@ -5,7 +5,6 @@ import java.util.Observer;
 
 import com.tomhedges.museumcompanion.R;
 import com.tomhedges.museumcompanion.config.Constants;
-import com.tomhedges.museumcompanion.config.Constants.DataSource;
 import com.tomhedges.museumcompanion.model.ItemObject;
 import com.tomhedges.museumcompanion.model.ItemObjectBuilder;
 import com.tomhedges.museumcompanion.model.SearchResults;

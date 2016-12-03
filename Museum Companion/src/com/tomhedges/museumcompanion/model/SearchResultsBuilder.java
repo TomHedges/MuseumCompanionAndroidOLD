@@ -154,7 +154,9 @@ public class SearchResultsBuilder extends Observable {
 			break;
 		}
 		
-		srResults.save(context, System.currentTimeMillis() + "");
+		if (srResults != null) {
+			srResults.save(context, System.currentTimeMillis() + "");
+		}
 		
 		return srResults;
 	}

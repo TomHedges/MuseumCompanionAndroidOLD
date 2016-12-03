@@ -4,14 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import android.util.Log;
 
 import com.tomhedges.museumcompanion.config.Constants;
 import com.tomhedges.museumcompanion.config.Constants.DataSource;
-import com.tomhedges.museumcompanion.model.ItemObject;
 import com.tomhedges.museumcompanion.utilities.HttpRetriever;
 
 /**
@@ -57,6 +53,7 @@ public class RemoteDataAccess {
 			// getting product details by making HTTP request
 
 			//TODO: Extract this to some sort of dependency injection??
+			
 			switch (dsDataSource) {
 			case BRITISH_MUSEUM:
 				returnData = httpRetriever.makeHttpRequest("http://collection.britishmuseum.org/id/object/" + strObjectID + "&format=json", "GET", params);
@@ -75,7 +72,9 @@ public class RemoteDataAccess {
 			}
 
 			if (!returnData.equals(Constants.ERROR_CODE)) {
-				Log.d(RemoteDataAccess.class.getName(), "Request results sample: " + returnData.substring(0, 200));
+				int iDataLength = 200;
+				if (returnData.length()<200) {iDataLength = returnData.length();}
+				Log.d(RemoteDataAccess.class.getName(), "Request results sample: " + returnData.substring(0, iDataLength));
 				//ioItemToReturn = new BritishMuseumBuilder(dsDataSource, strObjectID, returnData);
 			} else {
 				Log.e(RemoteDataAccess.class.getName(), "No result to return");
@@ -151,7 +150,9 @@ public class RemoteDataAccess {
 			}
 
 			if (!returnData.equals(Constants.ERROR_CODE)) {
-				Log.d(RemoteDataAccess.class.getName(), "Request results sample: " + returnData.substring(0, 200));
+				int iDataLength = 200;
+				if (returnData.length()<200) {iDataLength = returnData.length();}
+				Log.d(RemoteDataAccess.class.getName(), "Request results sample: " + returnData.substring(0, iDataLength));
 				//ioItemToReturn = new BritishMuseumBuilder(dsDataSource, strObjectID, returnData);
 			} else {
 				Log.e(RemoteDataAccess.class.getName(), "No result to return");
@@ -231,7 +232,9 @@ public class RemoteDataAccess {
 			}
 
 			if (!returnData.equals(Constants.ERROR_CODE)) {
-				Log.d(RemoteDataAccess.class.getName(), "Request results sample: " + returnData.substring(0, 200));
+				int iDataLength = 200;
+				if (returnData.length()<200) {iDataLength = returnData.length();}
+				Log.d(RemoteDataAccess.class.getName(), "Request results sample: " + returnData.substring(0, iDataLength));
 				//ioItemToReturn = new BritishMuseumBuilder(dsDataSource, strObjectID, returnData);
 			} else {
 				Log.e(RemoteDataAccess.class.getName(), "No result to return");

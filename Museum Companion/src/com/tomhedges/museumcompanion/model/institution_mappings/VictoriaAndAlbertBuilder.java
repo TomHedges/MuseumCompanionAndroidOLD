@@ -10,6 +10,7 @@ import com.tomhedges.museumcompanion.config.Constants;
 import com.tomhedges.museumcompanion.config.Constants.DataSource;
 import com.tomhedges.museumcompanion.model.ItemObject;
 import com.tomhedges.museumcompanion.model.SearchResults;
+import com.tomhedges.museumcompanion.model.SearchResultsBuilder;
 
 public class VictoriaAndAlbertBuilder {
 
@@ -141,7 +142,7 @@ public class VictoriaAndAlbertBuilder {
 
 
 	public static SearchResults BuildSearchResults(String strRetrievedResultsData) {
-
+		
 		JSONObject jObj;
 		JSONObject joObject = null;
 		JSONArray resultsArray;
@@ -151,10 +152,17 @@ public class VictoriaAndAlbertBuilder {
 		String[] straTitles = null;
 		String[] straURLs = null;
 		DataSource[] dsaDataSources = null;
+		Integer iResultCount;
 
 		try {
 			jObj = new JSONObject(strRetrievedResultsData);
 			joObject = jObj.getJSONObject(Constants.SEARCH_RESULTS_FIELD_VICTORIA_AND_ALBERT_RESULTS);
+			iResultCount = joObject.getInt(Constants.SEARCH_RESULTS_FIELD_VICTORIA_AND_ALBERT_RESULT_COUNT);
+			Log.v(VictoriaAndAlbertBuilder.class.getName(), "Number of results: " + iResultCount);
+			if (iResultCount==0) {
+				Log.v(VictoriaAndAlbertBuilder.class.getName(), "No results returned by search - bailing out...");
+				return null;
+			}
 			resultsArray = jObj.getJSONArray(Constants.SEARCH_RESULTS_FIELD_VICTORIA_AND_ALBERT_RECORDS);
 
 			straTitles = new String[resultsArray.length()];

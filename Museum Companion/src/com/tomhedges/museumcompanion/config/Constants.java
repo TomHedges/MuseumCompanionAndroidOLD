@@ -15,6 +15,8 @@ import java.util.Map;
 public class Constants {
 	public static boolean TEST_DATA_FORCE_LOAD = false;
 	public static boolean TEST_STOP_IMAGE_LOAD = false;
+	
+	public static boolean VERBOSE_LOGGING = false;
 
 	public static int SEARCH_RESULTS_GROUPING = 20;
 	public static String SEARCH_RESULTS_REQUESTED = "100";
@@ -102,6 +104,7 @@ public class Constants {
 
 	public static String SEARCH_RESULTS_FIELD_VICTORIA_AND_ALBERT_SEARCH_ROOT = "http://www.vam.ac.uk/api/json/museumobject/search";
 	public static String SEARCH_RESULTS_FIELD_VICTORIA_AND_ALBERT_RESULTS = "meta";
+	public static String SEARCH_RESULTS_FIELD_VICTORIA_AND_ALBERT_RESULT_COUNT = "result_count";
 	public static String SEARCH_RESULTS_FIELD_VICTORIA_AND_ALBERT_RECORDS = "records";
 	public static String SEARCH_RESULTS_FIELD_VICTORIA_AND_ALBERT_FIELDS = "fields";
 	public static String SEARCH_RESULTS_FIELD_VICTORIA_AND_ALBERT_OBJECT_NAME = "object";

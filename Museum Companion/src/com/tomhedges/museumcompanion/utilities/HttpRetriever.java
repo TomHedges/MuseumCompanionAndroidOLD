@@ -85,12 +85,12 @@ public class HttpRetriever {
                 }
     			HttpGet httpGet = new HttpGet(url);
     			httpGet.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;");
-                Log.d(RemoteDataAccess.class.getName(), "Attempting GET of data from: " + url);
+                Log.v(RemoteDataAccess.class.getName(), "Attempting GET of data from: " + url);
                 HttpResponse httpResponse = httpClient.execute(httpGet);
-                Log.d(RemoteDataAccess.class.getName(), "Attempt has been executed!");
+                Log.v(RemoteDataAccess.class.getName(), "Attempt has been executed!");
 
                 status = httpResponse.getStatusLine();
-                Log.d(RemoteDataAccess.class.getName(), "Response: " + status.getStatusCode() + " : " + status.getReasonPhrase());
+                Log.v(RemoteDataAccess.class.getName(), "Response: " + status.getStatusCode() + " : " + status.getReasonPhrase());
         		HttpEntity httpEntity = httpResponse.getEntity();
                 is = httpEntity.getContent();
             }           
@@ -123,21 +123,21 @@ public class HttpRetriever {
             return Constants.ERROR_CODE;
         }
         
-    	Log.d(HttpRetriever.class.getName(), "Attempting to buffer results data...");
+    	Log.v(HttpRetriever.class.getName(), "Attempting to buffer results data...");
  
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     is, "iso-8859-1"), 8);
             StringBuilder sb = new StringBuilder(is.available());
             String line = null;
-        	Log.d(HttpRetriever.class.getName(), "About to read each line");
+        	Log.v(HttpRetriever.class.getName(), "About to read each line");
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
                 
                 //UNCOMMENT THIS LINE FOR VERBOSE LOGGING OF RESPONSE DATA
-            	//Log.d(HttpRetriever.class.getName(), line);
+            	Log.v(HttpRetriever.class.getName(), line);
             }
-        	Log.d(HttpRetriever.class.getName(), "Finished handling each line");
+        	Log.v(HttpRetriever.class.getName(), "Finished handling each line");
             is.close();
             json = sb.toString();
         	Log.d(HttpRetriever.class.getName(), "Data buffered");
